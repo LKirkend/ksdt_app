@@ -1,10 +1,12 @@
-/* This is the schedule */
+/* This is the schedule implemented with webview
+* This requires you to download the webview package  
+*/
 
 /*imports */
-import { StyleSheet } from 'react-native';
-import { Text, View } from '../../components/Themed';
 import { WebView } from 'react-native-webview';
 
+/** 
+ *  @return WebView element linked to Spinitron schedule */
 export default function Schedule (){
 return ( 
     <WebView
@@ -12,3 +14,7 @@ return (
   />
 );
 }
+
+
+
+
