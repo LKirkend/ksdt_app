@@ -8,29 +8,29 @@
 export async function serverFetch (url:string) {
     let head: Headers  = new Headers(); 
     head.append( 'Content-Type', 'application/json')
-    // append all the necessary headers once that's clear. 
 
     //Check Response.status and Response.ok
-    var  res = await fetch(url).then(
-        response =>{
+    var  res = await fetch(url, {headers: head}).then(
+        (response) => {
             if (!response.ok){
                 throw new Error ("Response is not ok")
             }
             else {
-                var file : Promise<any> = response.json()
+                response.json().then((json)=>{console.log(json)}) //this line breaks the code bc stream can only be read 1x
+                var file : Promise<Response> = response.json()
                 return file; 
             }
         } )
         .catch
-            (function(error) { throw new TypeError('The result could not be fetched. Its type is null.'); })
+            ((error) => console.log(error))
         }
 
-
+/*
 class getData {
 
     /**
      * @var array Cache expiration time per endpoint
-     */
+     *
     protected static cacheTimeout: {[key: string]: number} = {
         'personas': 900,
         'shows': 900,
@@ -53,9 +53,6 @@ class getData {
                 'ignore_errors' => true,
             ],
         ]);
-*/
 
-}
 
-//cache data to local folder 
-
+} */
